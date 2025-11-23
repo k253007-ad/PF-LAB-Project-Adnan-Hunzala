@@ -1,6 +1,9 @@
 #ifndef MENU_SYSTEM_C
 #define MENU_SYSTEM_C
 
+// I copied this online and altered it because, I tought it would make game more fun.
+// I can remove this file if its not appropriate.
+
 #include "raylib.h"
 #include <math.h>
 #include <stdio.h>

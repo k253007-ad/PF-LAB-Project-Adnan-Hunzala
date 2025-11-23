@@ -54,6 +54,9 @@ int main(void){
     playerX = startX;
     playerY = startY;
     
+    // Tilemap
+    LoadCSVToArray("files/map.csv", levelMap, &rows, &cols);
+    
     for (int y = 0; y < MAP_HEIGHT; y++){
         for (int x = 0; x < MAP_WIDTH; x++){
             if(levelMap[y][x] == 213){
@@ -69,6 +72,7 @@ int main(void){
         }
     }
     
+    // Camera to follow
     Camera2D camera = {0};
     camera.target = (Vector2){playerX, playerY};
     camera.offset = (Vector2){screenWidth / 2.0f, screenHeight / 2.0f};
@@ -78,8 +82,11 @@ int main(void){
     bool gameStarted = false;
     
     while(!WindowShouldClose()) {
+        
         deltaTime = GetFrameTime();
         UpdateMusicStream(mainTheme);
+        
+        // Checking for menu
         
         if (!MenuIsInGame()) {
             BeginDrawing();
@@ -117,6 +124,7 @@ int main(void){
             
         }
         
+        // Disable falling off map
         if(playerY > 4800){
             ResetGameState();
             camera.target = (Vector2){playerX, playerY};
@@ -149,6 +157,8 @@ int main(void){
             hitboxHeight
         };
         
+        // Check for coin collection and remove collected coins
+        
         for(int i = 0; i < coinCount; i++){
             if(!coins[i].collected){
                 Rectangle coinRect = {
@@ -165,6 +175,8 @@ int main(void){
                 }
             }
         }
+        
+        // Camera follow player
         
         camera.target.x += ((playerX + 48) - camera.target.x) * 0.1f;
         camera.target.y += (playerY - camera.target.y) * 0.1f;
@@ -197,6 +209,8 @@ int main(void){
                     }
                 }
                 
+                // Drawing tiles
+                
                 for (int i = 0; i < tileCount; i++){
                     
                     TileType tType = tileTypes[tiles[i].type];
@@ -220,6 +234,8 @@ int main(void){
                     DrawTexturePro(tilesetTexture, source, dest, (Vector2){0, 0}, 0.0f, WHITE);
                 }
                 
+                // Player Animation and Drawing on screen
+                
                 AnimationDef anim = animations[currentAnim];
                 int row = anim.startRow + (currentFrame / anim.framesPerRow);
                 int col = anim.startCol + (currentFrame % anim.framesPerRow);
@@ -236,10 +252,13 @@ int main(void){
                 Rectangle dest = {playerX, playerY, 96, 96};
                 DrawTexturePro(knightSprite, source, dest, (Vector2){0, 0}, 0.0f, WHITE);
                 
+                // This code is here to check the hitbox
                 // Rectangle hitbox = {playerX + hitboxOffsetX, playerY + hitboxOffsetY, hitboxWidth, hitboxHeight};
                 // DrawRectangleLinesEx(hitbox, 2, RED);
                 
             EndMode2D();
+            
+            //All of text on screen
             
             DrawText("WASD/Arrows: Move | SPACE: Jump | SHIFT: Air Dash\nP: Pause", 20, 20, 25, WHITE);
             

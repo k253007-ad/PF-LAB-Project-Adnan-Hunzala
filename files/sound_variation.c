@@ -1,6 +1,9 @@
 #ifndef RAYLIB_VARIED_SOUND_H
 #define RAYLIB_VARIED_SOUND_H
 
+// I copied this online and altered it because, I tought it would make game more fun.
+// I can remove this file if its not appropriate.
+
 #include "raylib.h"
 #include <math.h>
 #include <stdlib.h>
