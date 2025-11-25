@@ -1,6 +1,8 @@
-# CHECK THE CODE
-*Download ZIP and unZIP*
+# PF LAB Project (BSE-1B)
 
-*Drag the main.c into Notepad++ for Raylib and press F6 to Execute*
+*Adnan Ahmed (25k-3007)*
 
-*I will give you what you want*
+*Syed Hunzala Ahmed Bukhari (25K-3089)*
+
+*Install Raylib from original website and run code in Notepad++ for Raylib to convert it into .exe file*
+*Shortcut for running the code is F6*
